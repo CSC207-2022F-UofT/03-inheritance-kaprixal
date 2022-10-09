@@ -33,7 +33,7 @@ public abstract class Bag {
         this.color = bagColour;
         this.capacity = bagCapacity;
         this.numberOfContents = 0;
-        this.contents = new String[numberOfContents];
+        this.contents = new String[capacity];
     }
 
 
@@ -83,6 +83,7 @@ public abstract class Bag {
         if(this.capacity > this.numberOfContents){
             this.contents[numberOfContents] = addedItem;
             this.numberOfContents += 1;
+
             return true;
         }
         return false;
@@ -104,7 +105,7 @@ public abstract class Bag {
     public String popItem(){
         if(numberOfContents - 1 >=0){
             String popped = this.contents[numberOfContents - 1];
-            this.contents[numberOfContents - 1] = null;
+            this.contents[numberOfContents - 1] = "";
             this.numberOfContents -= 1;
             return popped;
         }
@@ -120,8 +121,12 @@ public abstract class Bag {
      * @param n the amount to increase this Bag's capacity by
      */
     public void increaseCapacity(int n) {
+        String[] updatedContents = new String[n + this.capacity];
+        for (int i = 0; i < this.capacity; i++){
+            updatedContents[i] = this.contents[i];
+        }
+        this.contents = updatedContents;
         this.capacity += n;
-
     }
 
     /**
